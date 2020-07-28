@@ -1,0 +1,9 @@
+body{
+  /* Start with mobile-first 320 X 1024 */
+  background: url('./marble.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 1024px;
+  margin: 0;
+  padding: 0;
+}

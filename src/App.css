@@ -1,1 +1,85 @@
+.wrapper{
+  /* start with mobile-first 320 X 1024 */
+  margin: 0;
+  padding: 0;
+}
 
+.header{
+  /* start with mobile-first 320 X 1024 */
+  width: 320px;
+  height: 102px;
+  text-align: center;
+  font-family: 'ChalkBoard SE';
+  font-weight: bold;
+  font-size: 36px;
+  letter-spacing: 3px;
+  line-height: 20px;
+  color: #232020;
+}
+
+.calc{
+  /* start with mobile-first 320 X 1024 */
+  height: 653px;
+  width: 248px;
+  background: #322F2F;
+  margin: 175px 36px 40px 36px;
+}
+
+#display{
+  /* start with mobile-first 320 X 1024 */
+  background: #d8d8d8;
+  height: 57px;
+  width: 213px;
+  color: #232020;
+  margin: 50px 20px 40px 20px;
+  border-top: 50px solid #232020;
+}
+
+.btn-area{
+  /* start with mobile-first 320 X 1024 */
+  /* use grid to make columns and rows even for buttons */
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto auto auto;
+  height: 499px;
+  width: 213px;
+  background: #d8d8d8;
+  margin: 0 19px;
+}
+
+.btn{
+  /* start with mobile-first 320 X 1024 */
+  background: #232020;
+  color: #fff;
+  width: 43px;
+  height: 46px;
+  text-align: center;
+  margin: 10px 10px;
+  font-size: 33px; 
+  outline: none;
+}
+
+#clear{
+  background: #f72222;
+  border: none;
+}
+
+.footer{
+  font-size: 8px;
+  text-align: center;
+}
+
+/* tablet screen */
+@media only screen and(min-width:){
+
+}
+
+/* desktop screen */
+@media only screen and(min-width:){
+
+}
+
+/* HD display */
+@media only screen and(min-width:){
+
+}
