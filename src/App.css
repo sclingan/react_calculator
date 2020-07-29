@@ -5,7 +5,6 @@
 }
 
 .header{
-  /* start with mobile-first 320 X 1024 */
   width: 320px;
   height: 102px;
   margin-top: 80px;
@@ -19,7 +18,6 @@
 }
 
 .calc{
-  /* start with mobile-first 320 X 1024 */
   height: 653px;
   width: 248px;
   background: #322F2F;
@@ -27,17 +25,18 @@
 }
 
 #display{
-  /* start with mobile-first 320 X 1024 */
   background: #d8d8d8;
   height: 57px;
   width: 213px;
   color: #232020;
   margin: 50px 20px 40px 20px;
   border-top: 50px solid #232020;
+  font-size: 40px;
+  text-align: right;
+  padding-right: 10px;
 }
 
 .btn-area{
-  /* start with mobile-first 320 X 1024 */
   /* use grid to make columns and rows even for buttons */
   display: grid;
   grid-template-columns: auto auto auto;
@@ -49,7 +48,6 @@
 }
 
 .btn{
-  /* start with mobile-first 320 X 1024 */
   background: #232020;
   color: #fff;
   width: 43px;
@@ -83,8 +81,11 @@
     #display{
       height: 57px;
       width: 581px;
+      font-size: 50px;
+      padding-right: 20px;
     }
     .btn-area{
+      /* adjust grid to display four columns */
       display: grid;
       grid-template-columns: auto auto auto auto;
       grid-template-rows: auto auto auto auto;
@@ -105,6 +106,7 @@
       text-align: center;
     }
     .calc{
+      /* use margin to center calc */
       margin: 175px 36px 50px 200px;
     }
 
