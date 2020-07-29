@@ -13,8 +13,8 @@ class Calculator extends React.Component{
   return (
     <div className="wrapper">
       <div className="header">
-          <h3>Calculator</h3>
-          <h3>App</h3>
+          Calculator
+          App
       </div>
       <div className="calc">
         <div id="display">

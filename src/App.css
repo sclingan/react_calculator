@@ -8,12 +8,13 @@
   /* start with mobile-first 320 X 1024 */
   width: 320px;
   height: 102px;
+  margin-top: 80px;
   text-align: center;
   font-family: 'ChalkBoard SE';
   font-weight: bold;
   font-size: 36px;
   letter-spacing: 3px;
-  line-height: 20px;
+  line-height: 3px;
   color: #232020;
 }
 
@@ -70,16 +71,53 @@
 }
 
 /* tablet screen */
-@media only screen and(min-width:){
-
+@media only screen and (min-width: 768px){
+    .header{
+      width: 768px;
+      text-align: center;
+    }
+    .calc{
+      height: 703px;
+      width: 632px;
+    }
+    #display{
+      height: 57px;
+      width: 581px;
+    }
+    .btn-area{
+      display: grid;
+      grid-template-columns: auto auto auto auto;
+      grid-template-rows: auto auto auto auto;
+      height: 539px;
+      width: 582px;
+    }
+    .btn{
+      width: 85px;
+      width: 57px;
+      margin: 20px 20px;
+    }
 }
 
 /* desktop screen */
-@media only screen and(min-width:){
+@media only screen and (min-width: 1024px){
+    .header{
+      width: 1024;
+      text-align: center;
+    }
+    .calc{
+      margin: 175px 36px 50px 200px;
+    }
 
 }
 
 /* HD display */
-@media only screen and(min-width:){
+@media only screen and (min-width: 1440px){
+  .header{
+    width: 1440px;
+    text-align: center;
+  }
+  .calc{
+    margin: 175px 50px 50px 400px;
+  }
 
 }
