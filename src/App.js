@@ -9,17 +9,27 @@ class Calculator extends React.Component{
         prev: 0,
         next: '',
         total: 0,
+        click: false,
     }
     this.handleClick = this.handleClick.bind(this);
+    this.handleFunction = this.handleFunction.bind(this);
   }
 
-  handleClick(event){
+  handleClick(event){  // takes the value that is input and adds it to display,total,prev
     this.setState({
       display: parseInt(this.state.display) + event.target.innerText,
-      prev: 0,
+      prev: parseInt(this.state.display) + event.target.innerText,
       next: '',
-      total: event.target.innerText,
+      total:  parseInt(this.state.display) + event.target.innerText,
+      click: false,
     })
+  }
+
+  //make a function to handle the 'function' i.e(add,sub,mult,div),
+  //make sure to change click to true, update the total and the prev states
+  // also check if prev is set , if so add new value to next, update total
+  handleFunction(event){
+
   }
 
 
@@ -49,10 +59,10 @@ class Calculator extends React.Component{
             <button className="btn" onClick={this.handleClick}>8</button>
             <button className="btn" onClick={this.handleClick}>9</button>
             <button className="btn" onClick={this.handleClick}>0</button>
-            <button className="btn">+</button>
-            <button className="btn">-</button>
-            <button className="btn">x</button>
-            <button className="btn">&#xf7;</button>
+            <button className="btn" onClick={this.handleFunction}>+</button>
+            <button className="btn" onClick={this.handleFunction}>-</button>
+            <button className="btn" onClick={this.handleFunction}>x</button>
+            <button className="btn" onClick={this.handleFunction}>&#xf7;</button>
             <button className="btn">.</button>
             <button className="btn" id="clear">C</button>
             <button className="btn">=</button>
