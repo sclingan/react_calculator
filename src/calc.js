@@ -7,13 +7,13 @@ function calc(current,next,func){
     console.log(cur);
     console.log(next);
     switch(func){
-        case "+":
+        case "add":
             return cur + nex;
-        case "-":
+        case "subtract":
             return cur - nex;
-        case "*":
+        case "multiply":
             return cur * nex;
-        case "/":
+        case "divide":
             return cur / nex;
         default:
             return null;

@@ -12,6 +12,7 @@ class Calculator extends React.Component{
         total: 0,
         click: false,
         function: '',
+        functionClick: false,
     }
     this.handleClick = this.handleClick.bind(this);
     this.handleFunction = this.handleFunction.bind(this);
@@ -24,38 +25,49 @@ class Calculator extends React.Component{
   handleClick(event){  // takes the value that is input and adds it to display,total,prev
     if(this.state.click === true){
       this.setState({
-        display: parseInt(this.state.display) + event.target.innerText,
+        display: String(this.state.display).replace('0','') + event.target.innerText,
         prev: this.state.prev, 
         next: parseInt(this.state.display) + event.target.innerText,
         total: calc(this.state.prev,this.state.display + event.target.innerText,this.state.function), /* add a calc function, call it with total(function) next */
         click: true,
         function: this.state.function,
+        functionClick: this.state.functionClick, // check to see when to flag this to true
       })
     }else{
     this.setState({
-      display: parseInt(this.state.display) + event.target.innerText,
+      display: String(this.state.display).replace('0','') + event.target.innerText,
       prev: parseInt(this.state.display) + event.target.innerText,
       next: '',
       total:  parseInt(this.state.display) + event.target.innerText,
       click: false,
       function: '',
+      functionClick: false, //check this to see when to flag this to true
     })
   }
 }
 
-  //make a function to handle the 'function' i.e(add,sub,mult,div),
-  //make sure to change click to true, update the total and the prev states
-  // also check if prev is set , if so add new value to next, update total
-  handleFunction(event){
-    this.setState({
+  handleFunction(event){  //make an if to handle if this.state.function has been clicked
+    if(this.state.functionClick === true){
+      this.setState({
+        display: 0,
+        prev: this.state.total,
+        next: '',
+        total: calc(this.state.prev,this.state.next,this.state.function),
+        click: true,
+        function: event.target.id,
+        functionClick: true,
+      })
+    }else{
+    this.setState({       // then handle keeping total correct
       display: 0,
       prev: this.state.prev,
-      next: '', // check this value after value is entered and before next click
+      next: this.state.next,
       total: this.state.total,
       click: true,
       function: event.target.id,
+      functionClick: true,
     })
-
+   }
   }
 
 
@@ -63,18 +75,27 @@ class Calculator extends React.Component{
 
   }
 
-  handleClear(){
-
+  handleClear(){     //clear all inputs and state, reset to 0
+       this.setState({
+         display: 0,
+         prev: '',
+         next: '',
+         total: '',
+         click: false,
+         function: '',
+         functionClick: false,
+       })
   }
 
-  handleEquals(){     //display the total when "=" is pressed
+  handleEquals(){     //display the total when equals is pressed
     this.setState({
-      display: '',
-      prev: '',
-      next: '',
-      total: '',
-      click: '',
-      function: '',
+      display: this.state.total,
+      prev: this.state.prev,
+      next: this.state.next,
+      total: this.state.total,
+      click: true,
+      function: this.state.function,
+      functionClick: '', //check to see when to flag this to true
     })
   }
 
@@ -91,23 +112,23 @@ class Calculator extends React.Component{
              {this.state.display}
         </div>
         <div className="btn-area">
-            <button className="btn" onClick={this.handleClick}>1</button>
-            <button className="btn" onClick={this.handleClick}>2</button>
-            <button className="btn" onClick={this.handleClick}>3</button>
-            <button className="btn" onClick={this.handleClick}>4</button>
-            <button className="btn" onClick={this.handleClick}>5</button>
-            <button className="btn" onClick={this.handleClick}>6</button>
-            <button className="btn" onClick={this.handleClick}>7</button>
-            <button className="btn" onClick={this.handleClick}>8</button>
-            <button className="btn" onClick={this.handleClick}>9</button>
-            <button className="btn" onClick={this.handleClick}>0</button>
-            <button className="btn" id="+" onClick={this.handleFunction}>+</button>
-            <button className="btn" id="-" onClick={this.handleFunction}>-</button>
-            <button className="btn" id="*" onClick={this.handleFunction}>x</button>
-            <button className="btn" id="/" onClick={this.handleFunction}>&#xf7;</button>
-            <button className="btn">.</button>
-            <button className="btn" id="clear">C</button>
-            <button className="btn">=</button>
+            <button className="btn" id="one" onClick={this.handleClick}>1</button>
+            <button className="btn" id="two" onClick={this.handleClick}>2</button>
+            <button className="btn" id="three" onClick={this.handleClick}>3</button>
+            <button className="btn" id="four" onClick={this.handleClick}>4</button>
+            <button className="btn" id="five" onClick={this.handleClick}>5</button>
+            <button className="btn" id="six" onClick={this.handleClick}>6</button>
+            <button className="btn" id="seven" onClick={this.handleClick}>7</button>
+            <button className="btn" id="eight" onClick={this.handleClick}>8</button>
+            <button className="btn" id="nine" onClick={this.handleClick}>9</button>
+            <button className="btn" id="ten" onClick={this.handleClick}>0</button>
+            <button className="btn" id="add" onClick={this.handleFunction}>+</button>
+            <button className="btn" id="subtract" onClick={this.handleFunction}>-</button>
+            <button className="btn" id="multiply" onClick={this.handleFunction}>x</button>
+            <button className="btn" id="divide" onClick={this.handleFunction}>&#xf7;</button>
+            <button className="btn" id="decimal" onClick={this.handleDecimal}>.</button>
+            <button className="btn" id="clear" onClick={this.handleClear}>C</button>
+            <button className="btn" id="equals" onClick={this.handleEquals}>=</button>
         </div>
       </div>
      <div className="footer">Photo by Augustine Wong on Unsplash</div>
