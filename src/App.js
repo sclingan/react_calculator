@@ -28,7 +28,7 @@ class Calculator extends React.Component{
         display: String(this.state.display).replace('0','') + event.target.innerText,
         prev: this.state.prev, 
         next: parseInt(this.state.display) + event.target.innerText,
-        total: calc(this.state.prev,this.state.display + event.target.innerText,this.state.function), /* add a calc function, call it with total(function) next */
+        total: calc(this.state.prev,this.state.display + event.target.innerText,this.state.function), 
         click: true,
         function: this.state.function,
         functionClick: this.state.functionClick, // check to see when to flag this to true
@@ -71,8 +71,16 @@ class Calculator extends React.Component{
   }
 
 
-  handleDecimal(){
-
+  handleDecimal(event){      // change all inputs and state to use floats
+      this.setState({
+        display: parseInt(this.state.display).toFixed(1),
+        prev:  '',
+        next:  '',
+        total:  '',
+        click:  true,
+        function: this.state.function,
+        functionClick: this.state.functionClick,
+      })
   }
 
   handleClear(){     //clear all inputs and state, reset to 0
@@ -90,8 +98,8 @@ class Calculator extends React.Component{
   handleEquals(){     //display the total when equals is pressed
     this.setState({
       display: this.state.total,
-      prev: this.state.prev,
-      next: this.state.next,
+      prev: this.state.total,
+      next: this.state.total,
       total: this.state.total,
       click: true,
       function: this.state.function,
