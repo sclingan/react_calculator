@@ -27,7 +27,7 @@ class Calculator extends React.Component{
       this.setState({
         display: String(this.state.display).replace('0','') + event.target.innerText,
         prev: this.state.prev, 
-        next: parseInt(this.state.display) + event.target.innerText,
+        next: String(this.state.display) + event.target.innerText,
         total: calc(this.state.prev,this.state.display + event.target.innerText,this.state.function), 
         click: true,
         function: this.state.function,
@@ -36,12 +36,12 @@ class Calculator extends React.Component{
     }else{
     this.setState({
       display: String(this.state.display).replace('0','') + event.target.innerText,
-      prev: parseInt(this.state.display) + event.target.innerText,
+      prev: String(this.state.display).replace('0','') + event.target.innerText,
       next: '',
-      total:  parseInt(this.state.display) + event.target.innerText,
+      total:  String(this.state.display).replace('0','') + event.target.innerText,
       click: false,
       function: '',
-      functionClick: false, //check this to see when to flag this to true
+      functionClick: false, 
     })
   }
 }
@@ -74,9 +74,9 @@ class Calculator extends React.Component{
   handleDecimal(event){      // change all inputs and state to use floats
       this.setState({
         display: parseInt(this.state.display).toFixed(1),
-        prev:  '',
+        prev:  parseInt(this.state.display).toFixed(1),
         next:  '',
-        total:  '',
+        total:  parseInt(this.state.display).toFixed(1),
         click:  true,
         function: this.state.function,
         functionClick: this.state.functionClick,
