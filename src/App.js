@@ -13,6 +13,7 @@ class Calculator extends React.Component{
         click: false,
         function: '',
         functionClick: false,
+        dec: false,
     }
     this.handleClick = this.handleClick.bind(this);
     this.handleFunction = this.handleFunction.bind(this);
@@ -31,7 +32,8 @@ class Calculator extends React.Component{
         total: calc(this.state.prev,this.state.display + event.target.innerText,this.state.function), 
         click: true,
         function: this.state.function,
-        functionClick: this.state.functionClick, // check to see when to flag this to true
+        functionClick: this.state.functionClick,
+        dec: this.state.dec, 
       })
     }else{
     this.setState({
@@ -42,6 +44,7 @@ class Calculator extends React.Component{
       click: false,
       function: '',
       functionClick: false, 
+      dec: false,
     })
   }
 }
@@ -56,6 +59,7 @@ class Calculator extends React.Component{
         click: true,
         function: event.target.id,
         functionClick: true,
+        dec: this.state.dec,
       })
     }else{
     this.setState({       // then handle keeping total correct
@@ -66,21 +70,36 @@ class Calculator extends React.Component{
       click: true,
       function: event.target.id,
       functionClick: true,
+      dec: this.state.dec,
     })
    }
   }
 
 
   handleDecimal(event){      // change all inputs and state to use floats
+    if(this.state.dec === true){
       this.setState({
-        display: parseInt(this.state.display).toFixed(1),
-        prev:  parseInt(this.state.display).toFixed(1),
-        next:  '',
-        total:  parseInt(this.state.display).toFixed(1),
+          display: String(this.state.display) + event.target.innerText,
+          prev: String(this.state.display) + event.target.innerText,
+          next: String(this.state.display) + event.target.innerText,
+          total: this.state.total,
+          click: this.state.click,
+          function: this.state.function,
+          functionClick: this.state.functionClick,
+          dec: true,
+      })
+    }else{
+      this.setState({
+        display: parseInt(this.state.display) + event.target.innerText,
+        prev:  this.state.prev,
+        next:  this.state.next,
+        total:  this.state.total,
         click:  true,
         function: this.state.function,
         functionClick: this.state.functionClick,
+        dec: true,
       })
+   }
   }
 
   handleClear(){     //clear all inputs and state, reset to 0
@@ -92,6 +111,7 @@ class Calculator extends React.Component{
          click: false,
          function: '',
          functionClick: false,
+         dec: false,
        })
   }
 
@@ -103,7 +123,8 @@ class Calculator extends React.Component{
       total: this.state.total,
       click: true,
       function: this.state.function,
-      functionClick: '', //check to see when to flag this to true
+      functionClick: '', 
+      dec: this.state.dec,
     })
   }
 

@@ -1,11 +1,8 @@
 
 
 function calc(current,next,func){
-    let cur = parseInt(current);
-    let nex = parseInt(next);
-    console.log(func);
-    console.log(cur);
-    console.log(next);
+    let cur = parseFloat(current);
+    let nex = parseFloat(next);
     switch(func){
         case "add":
             return cur + nex;
@@ -18,6 +15,7 @@ function calc(current,next,func){
         default:
             return null;
     }
-}
+ }
+
 
 export default calc;
