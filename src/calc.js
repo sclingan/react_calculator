@@ -1,21 +1,18 @@
-
-
-function calc(current,next,func){
-    let cur = parseFloat(current);
-    let nex = parseFloat(next);
+function calc(value1,value2,func){
+    let val1 = parseFloat(value1);
+    let val2 = parseFloat(value2);
     switch(func){
         case "add":
-            return cur + nex;
+            return val1 + val2;
         case "subtract":
-            return cur - nex;
+            return val1 - val2;
         case "multiply":
-            return cur * nex;
+            return val1 * val2;
         case "divide":
-            return cur / nex;
+            return val1 / val2;
         default:
-            return null;
+            return 'error';
     }
- }
-
+}
 
 export default calc;

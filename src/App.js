@@ -6,125 +6,75 @@ class Calculator extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-        display: 0,
-        prev: 0,
-        next: '',
-        total: 0,
-        click: false,
-        function: '',
-        functionClick: false,
-        dec: false,
+      display: '0',
+      function: '',
+      value1: '',
+      value2: '',
+      click: false,
+      total: '',
+      functionClick: false,
     }
+    //bind all functions to this
     this.handleClick = this.handleClick.bind(this);
     this.handleFunction = this.handleFunction.bind(this);
-    this.handleFunction = this.handleFunction.bind(this);
-    this.handleDecimal = this.handleDecimal.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.handleEquals = this.handleEquals.bind(this);
   }
 
-  handleClick(event){  // takes the value that is input and adds it to display,total,prev
-    if(this.state.click === true){
+  handleClick(event){    //input the values into this.state.display, 
+    //if this.state.click is true, remove leading zero and store display in this.state.value2, keep a running total in this.state.total
+    if(this.state.click){
       this.setState({
-        display: String(this.state.display).replace('0','') + event.target.innerText,
-        prev: this.state.prev, 
-        next: String(this.state.display) + event.target.innerText,
-        total: calc(this.state.prev,this.state.display + event.target.innerText,this.state.function), 
-        click: true,
-        function: this.state.function,
-        functionClick: this.state.functionClick,
-        dec: this.state.dec, 
+        display: (String(this.state.display).startsWith('0')) ? String(this.state.display).replace('0','') + event.target.innerText : this.state.display + event.target.innerText,
+        value2: (String(this.state.display).startsWith('0')) ? String(this.state.display).replace('0','') + event.target.innerText : this.state.display + event.target.innerText,
+        click: this.state.click,
+        total: calc(this.state.value1,(String(this.state.display).startsWith('0')) ? String(this.state.display).replace('0','') + event.target.innerText : this.state.display + event.target.innerText,this.state.function),
       })
     }else{
     this.setState({
-      display: String(this.state.display).replace('0','') + event.target.innerText,
-      prev: String(this.state.display).replace('0','') + event.target.innerText,
-      next: '',
-      total:  String(this.state.display).replace('0','') + event.target.innerText,
-      click: false,
-      function: '',
-      functionClick: false, 
-      dec: false,
-    })
-  }
-}
-
-  handleFunction(event){  //make an if to handle if this.state.function has been clicked
-    if(this.state.functionClick === true){
-      this.setState({
-        display: 0,
-        prev: this.state.total,
-        next: '',
-        total: calc(this.state.prev,this.state.next,this.state.function),
-        click: true,
-        function: event.target.id,
-        functionClick: true,
-        dec: this.state.dec,
-      })
-    }else{
-    this.setState({       // then handle keeping total correct
-      display: 0,
-      prev: this.state.prev,
-      next: this.state.next,
-      total: this.state.total,
+      display: (String(this.state.display).startsWith('0')) ? String(this.state.display).replace('0','') + event.target.innerText : this.state.display + event.target.innerText,
       click: true,
-      function: event.target.id,
-      functionClick: true,
-      dec: this.state.dec,
     })
    }
-  }
-
-
-  handleDecimal(event){      // change all inputs and state to use floats
-    if(this.state.dec === true){
+   //if two decimal points are in display, find and remove one
+   if(String(this.state.display).includes('.')){
+    let last = String(this.state.display).lastIndexOf('.');
+    let first = String(this.state.display).indexOf('.');
+    if(first !== last){
       this.setState({
-          display: String(this.state.display) + event.target.innerText,
-          prev: String(this.state.display) + event.target.innerText,
-          next: String(this.state.display) + event.target.innerText,
-          total: this.state.total,
-          click: this.state.click,
-          function: this.state.function,
-          functionClick: this.state.functionClick,
-          dec: true,
+        display: (String(this.state.display).includes('..')) ? String(this.state.display).replace('.','') + event.target.innerText : parseFloat(this.state.display) + event.target.innerText,
       })
-    }else{
-      this.setState({
-        display: parseInt(this.state.display) + event.target.innerText,
-        prev:  this.state.prev,
-        next:  this.state.next,
-        total:  this.state.total,
-        click:  true,
-        function: this.state.function,
-        functionClick: this.state.functionClick,
-        dec: true,
-      })
-   }
+    }
   }
+ }
+
+ handleFunction(event){     //adds function(i.e 'add','subtract') to state, if 'subtract' is clicked first it makes a negative value                     
+  this.setState({
+    display: (this.state.display === '0' && event.target.id === "subtract") ? String(this.state.display).replace('0','-') : '0',
+    function: (this.state.display === '0' && event.target.id === "subtract") ? this.state.function : event.target.id,
+    value1: (this.state.functionClick) ? this.state.total : this.state.display,
+    value2: '',
+    click: this.state.click,
+    total: (this.state.functionClick) ? this.state.total : this.state.display,  
+    functionClick: true, 
+  })
+}
 
   handleClear(){     //clear all inputs and state, reset to 0
        this.setState({
-         display: 0,
-         prev: '',
-         next: '',
-         total: '',
-         click: false,
-         function: '',
-         functionClick: false,
-         dec: false,
+        display: '0',
+        function: '',
+        value1: '',
+        value2: '',
+        click: false,
+        total: '',
+        functionClick: false,
        })
   }
 
   handleEquals(){     //display the total when equals is pressed
     this.setState({
       display: this.state.total,
-      prev: this.state.total,
-      next: this.state.total,
-      total: this.state.total,
-      click: true,
-      function: this.state.function,
-      functionClick: '', 
-      dec: this.state.dec,
     })
   }
 
@@ -150,12 +100,12 @@ class Calculator extends React.Component{
             <button className="btn" id="seven" onClick={this.handleClick}>7</button>
             <button className="btn" id="eight" onClick={this.handleClick}>8</button>
             <button className="btn" id="nine" onClick={this.handleClick}>9</button>
-            <button className="btn" id="ten" onClick={this.handleClick}>0</button>
+            <button className="btn" id="zero" onClick={this.handleClick}>0</button>
             <button className="btn" id="add" onClick={this.handleFunction}>+</button>
             <button className="btn" id="subtract" onClick={this.handleFunction}>-</button>
             <button className="btn" id="multiply" onClick={this.handleFunction}>x</button>
             <button className="btn" id="divide" onClick={this.handleFunction}>&#xf7;</button>
-            <button className="btn" id="decimal" onClick={this.handleDecimal}>.</button>
+            <button className="btn" id="decimal" onClick={this.handleClick}>.</button>
             <button className="btn" id="clear" onClick={this.handleClear}>C</button>
             <button className="btn" id="equals" onClick={this.handleEquals}>=</button>
         </div>
